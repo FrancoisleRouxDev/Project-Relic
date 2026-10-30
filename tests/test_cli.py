@@ -1,8 +1,8 @@
 import io
 
-from conftest import FakeProvider
 from rich.console import Console
 
+from conftest import FakeProvider
 from relic.agent import Agent
 from relic.cli import handle_command, run_chat
 from relic.memory import SQLiteMemoryStore
