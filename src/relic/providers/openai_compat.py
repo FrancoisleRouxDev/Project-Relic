@@ -35,11 +35,13 @@ class OpenAICompatProvider(LLMProvider):
         max_attempts: int = 5,
         wait: wait_base | None = None,
         client: OpenAI | None = None,
+        extra_body: dict[str, Any] | None = None,
     ) -> None:
         # The SDK's own retries are disabled; tenacity owns the retry policy.
         self._client = client or OpenAI(base_url=base_url, api_key=api_key, max_retries=0)
         self._model = model
         self._temperature = temperature
+        self._extra_body = extra_body
         self._max_attempts = max_attempts
         self._wait = wait or wait_exponential(multiplier=1, min=1, max=30)
 
@@ -64,5 +66,8 @@ class OpenAICompatProvider(LLMProvider):
 
     def _request(self, messages: list[Message]) -> Any:
         return self._client.chat.completions.create(
-            model=self._model, messages=messages, temperature=self._temperature
+            model=self._model,
+            messages=messages,
+            temperature=self._temperature,
+            extra_body=self._extra_body,
         )

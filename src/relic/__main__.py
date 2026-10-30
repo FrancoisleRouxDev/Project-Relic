@@ -23,11 +23,15 @@ def main() -> int:
         console.print(f"[red]{escape(str(exc))}[/red]")
         return 1
 
+    extra_body = None
+    if settings.llm_enable_thinking is not None:
+        extra_body = {"chat_template_kwargs": {"enable_thinking": settings.llm_enable_thinking}}
     provider = OpenAICompatProvider(
         base_url=settings.llm_base_url,
         api_key=settings.llm_api_key,
         model=settings.llm_model,
         temperature=settings.llm_temperature,
+        extra_body=extra_body,
     )
     memory = SQLiteMemoryStore(settings.data_dir / "relic.db")
     agent = Agent(provider, persona, memory, settings.user_name, settings.history_limit)

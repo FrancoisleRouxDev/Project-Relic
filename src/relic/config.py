@@ -20,6 +20,8 @@ class Settings(BaseSettings):
     llm_api_key: str
     llm_model: str = "meta/llama-3.3-70b-instruct"
     llm_temperature: float = 0.8
+    # None = send nothing. Set true/false for models with a thinking switch.
+    llm_enable_thinking: bool | None = None
     persona_file: Path = Path("personas/relic.yaml")
     user_name: str = "choom"
     data_dir: Path = Path("./data")

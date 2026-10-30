@@ -27,6 +27,7 @@ def _clean_env(monkeypatch: pytest.MonkeyPatch, tmp_path: Path) -> None:
         "LLM_API_KEY",
         "LLM_MODEL",
         "LLM_TEMPERATURE",
+        "LLM_ENABLE_THINKING",
         "PERSONA_FILE",
         "USER_NAME",
         "DATA_DIR",

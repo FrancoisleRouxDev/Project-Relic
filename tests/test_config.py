@@ -45,3 +45,10 @@ def test_invalid_value_gives_config_error(monkeypatch: pytest.MonkeyPatch) -> No
     monkeypatch.setenv("LLM_TEMPERATURE", "hot")
     with pytest.raises(ConfigError, match="LLM_TEMPERATURE"):
         load_settings()
+
+
+def test_enable_thinking_optional(monkeypatch: pytest.MonkeyPatch) -> None:
+    monkeypatch.setenv("LLM_API_KEY", "k")
+    assert load_settings().llm_enable_thinking is None
+    monkeypatch.setenv("LLM_ENABLE_THINKING", "false")
+    assert load_settings().llm_enable_thinking is False

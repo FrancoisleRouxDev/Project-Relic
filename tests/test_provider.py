@@ -44,7 +44,7 @@ def test_returns_reply_and_passes_params() -> None:
     client.chat.completions.create.return_value = ok("  pong ")
     assert make_provider(client).chat(MESSAGES) == "pong"
     client.chat.completions.create.assert_called_once_with(
-        model="m", messages=MESSAGES, temperature=0.5
+        model="m", messages=MESSAGES, temperature=0.5, extra_body=None
     )
 
 
@@ -77,3 +77,19 @@ def test_does_not_retry_auth_errors() -> None:
     with pytest.raises(ProviderError, match="LLM_API_KEY"):
         make_provider(client).chat(MESSAGES)
     assert client.chat.completions.create.call_count == 1
+
+
+def test_extra_body_is_forwarded() -> None:
+    client = MagicMock()
+    client.chat.completions.create.return_value = ok()
+    body = {"chat_template_kwargs": {"enable_thinking": False}}
+    provider = OpenAICompatProvider(
+        base_url="http://test",
+        api_key="k",
+        model="m",
+        wait=wait_none(),
+        client=client,
+        extra_body=body,
+    )
+    provider.chat(MESSAGES)
+    assert client.chat.completions.create.call_args.kwargs["extra_body"] == body

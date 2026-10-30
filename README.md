@@ -88,6 +88,7 @@ The SQLite database lives in the `/data` volume.
 | `LLM_API_KEY` | required |
 | `LLM_MODEL` | `meta/llama-3.3-70b-instruct` |
 | `LLM_TEMPERATURE` | `0.8` |
+| `LLM_ENABLE_THINKING` | unset (set `true`/`false` for models with a thinking switch, e.g. Nemotron) |
 | `PERSONA_FILE` | `personas/relic.yaml` |
 | `USER_NAME` | `choom` |
 | `DATA_DIR` | `./data` |
