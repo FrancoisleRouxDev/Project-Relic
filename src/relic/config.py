@@ -18,7 +18,7 @@ class Settings(BaseSettings):
 
     llm_base_url: str = "https://integrate.api.nvidia.com/v1"
     llm_api_key: str
-    llm_model: str = "meta/llama-3.3-70b-instruct"
+    llm_model: str = "nvidia/nemotron-3.5-lightning-30b-a3b"
     llm_temperature: float = 0.8
     # None = send nothing. Set true/false for models with a thinking switch.
     llm_enable_thinking: bool | None = None

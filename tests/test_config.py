@@ -9,7 +9,7 @@ def test_defaults_with_only_key(monkeypatch: pytest.MonkeyPatch) -> None:
     monkeypatch.setenv("LLM_API_KEY", "k")
     s = load_settings()
     assert s.llm_base_url == "https://integrate.api.nvidia.com/v1"
-    assert s.llm_model == "meta/llama-3.3-70b-instruct"
+    assert s.llm_model == "nvidia/nemotron-3.5-lightning-30b-a3b"
     assert s.llm_temperature == 0.8
     assert s.user_name == "choom"
     assert s.persona_file == Path("personas/relic.yaml")

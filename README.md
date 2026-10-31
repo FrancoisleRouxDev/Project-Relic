@@ -86,7 +86,7 @@ The SQLite database lives in the `/data` volume.
 | --- | --- |
 | `LLM_BASE_URL` | `https://integrate.api.nvidia.com/v1` |
 | `LLM_API_KEY` | required |
-| `LLM_MODEL` | `meta/llama-3.3-70b-instruct` |
+| `LLM_MODEL` | `nvidia/nemotron-3.5-lightning-30b-a3b` |
 | `LLM_TEMPERATURE` | `0.8` |
 | `LLM_ENABLE_THINKING` | unset (set `true`/`false` for models with a thinking switch, e.g. Nemotron) |
 | `PERSONA_FILE` | `personas/relic.yaml` |
@@ -101,7 +101,7 @@ Only `.env` changes.
 ```ini
 # NVIDIA NIM (default)
 LLM_BASE_URL=https://integrate.api.nvidia.com/v1
-LLM_MODEL=meta/llama-3.3-70b-instruct
+LLM_MODEL=nvidia/nemotron-3.5-lightning-30b-a3b
 
 # Local Ollama (key is ignored but must be non-empty)
 LLM_BASE_URL=http://localhost:11434/v1
