@@ -52,3 +52,12 @@ def test_respond_persists_both_sides_and_sends_user_message(
         ("user", "hello"),
         ("assistant", "hello back"),
     ]
+
+
+def test_style_note_is_appended_last(persona: Persona, store: SQLiteMemoryStore) -> None:
+    store.add_fact("likes coffee")
+    agent = make_agent(FakeProvider(), persona, store)
+    agent.style_note = "Be brief."
+    system = agent.system_prompt()
+    assert system.endswith("## Output style\nBe brief.")
+    assert system.index("likes coffee") < system.index("Be brief.")

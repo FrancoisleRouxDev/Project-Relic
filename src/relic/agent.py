@@ -24,14 +24,17 @@ class Agent:
         self.user_name = user_name
         self.history_limit = history_limit
         self.session_id = uuid.uuid4().hex
+        self.style_note: str | None = None  # extra, mode-specific instructions (e.g. voice)
 
     def system_prompt(self) -> str:
-        """Persona prompt followed by a facts section (if any facts are saved)."""
+        """Persona prompt, then saved facts (if any), then the style note (if any)."""
         prompt = self.persona.system_prompt
         facts = self.memory.list_facts()
         if facts:
             lines = "\n".join(f"- {fact.content}" for fact in facts)
             prompt += f"\n\n## Things you know about {self.user_name}\n{lines}"
+        if self.style_note:
+            prompt += f"\n\n## Output style\n{self.style_note}"
         return prompt
 
     def build_messages(self) -> list[Message]:

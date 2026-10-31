@@ -94,6 +94,21 @@ The SQLite database lives in the `/data` volume.
 | `DATA_DIR` | `./data` |
 | `HISTORY_LIMIT` | `20` (messages reloaded into context) |
 
+## Voice mode (optional)
+
+Talk to Relic with a wake phrase ("hey relic"). Speech-to-text runs locally with
+[faster-whisper](https://github.com/SYSTRAN/faster-whisper); replies are spoken by [Piper](https://github.com/OHF-Voice/piper1-gpl).
+
+```bash
+pip install -e ".[voice]"
+python -m piper.download_voices en_US-lessac-medium --download-dir voices
+# in .env: PIPER_MODEL=voices/en_US-lessac-medium.onnx
+python -m relic --voice
+```
+
+Say the wake phrase and your request in one breath ("Hey Relic, what's up?"). Use headphones so
+Relic doesn't hear itself. Tune with `WAKE_PHRASE`, `WHISPER_MODEL` and `MIC_THRESHOLD`.
+
 ## Swapping providers
 
 Only `.env` changes.

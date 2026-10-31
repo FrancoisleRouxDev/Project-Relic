@@ -26,6 +26,10 @@ class Settings(BaseSettings):
     user_name: str = "choom"
     data_dir: Path = Path("./data")
     history_limit: int = 20
+    wake_phrase: str | None = None  # Default: "Hey <persona name>"
+    whisper_model: str = "small.en"  # tiny.en/base.en are faster, medium.en is more accurate
+    piper_model: Path | None = None  # path to Piper voice .onnx file
+    mic_threshold: float = 0.015  # raise if background noise triggers it
 
 
 def load_settings(**overrides: Any) -> Settings:

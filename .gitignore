@@ -18,6 +18,7 @@ venv/
 .ruff_cache/
 .coverage
 htmlcov/
+voices/
 
 # Editors / OS
 .vscode/
